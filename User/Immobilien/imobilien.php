@@ -4,10 +4,6 @@ session_start();
 //Verbindung zur DB herstellen
 $_SESSION["verbindung"] = verbindung();
 
-$immos = getImmobilien();
-var_dump($immos);
-print_r($immos);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,12 +32,8 @@ function verbindung()
 
 function getImmobilien()
 {
-
     $query = mysqli_query($_SESSION["verbindung"], "SELECT * FROM immobilien");
-
     $immos = mysqli_fetch_all($query, MYSQLI_ASSOC);
-    echo json_encode($immos);
-
     return $immos;
 }
 
