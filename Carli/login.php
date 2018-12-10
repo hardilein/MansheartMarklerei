@@ -25,25 +25,6 @@ $warnung = anmelden();
 		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
     </head>
     <body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="container">
             <header>
 
@@ -76,10 +57,10 @@ $warnung = anmelden();
 
                 <h5 class="text-danger">
                     <?php
-                        if (!empty($warnung)){
-                            echo "$warnung";
-                        }
-                    ?>
+if (!empty($warnung)) {
+    echo "$warnung";
+}
+?>
                 </h5>
 
 
@@ -89,20 +70,6 @@ $warnung = anmelden();
 								</p>
                             </form>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                       </div>
                   </div>
               </section>
@@ -113,45 +80,42 @@ $warnung = anmelden();
 
 
   <?php
-      function verbindung()
-      {
-          $_SESSION["verbindung"] = mysqli_connect('localhost', 'root','My102118910', 'immomaster');
-          if (!$_SESSION["verbindung"]) {
-              die("Connection failed!:".mysqli_connect_error());
-          }
-          return $_SESSION["verbindung"];
-      }
+function verbindung()
+{
+    $_SESSION["verbindung"] = mysqli_connect('localhost', 'root', 'My102118910', 'immomaster');
+    if (!$_SESSION["verbindung"]) {
+        die("Connection failed!:" . mysqli_connect_error());
+    }
+    return $_SESSION["verbindung"];
+}
 
-      function anmelden(/*$_SESSION["verbindung"]*/)
-      {
-          if(isset($_POST["username"]) && isset($_POST["password"])){
+function anmelden( /*$_SESSION["verbindung"]*/)
+{
+    if (isset($_POST["username"]) && isset($_POST["password"])) {
 
-              $username = mysqli_real_escape_string($_SESSION["verbindung"], $_POST["username"]);
-              $password = mysqli_real_escape_string($_SESSION["verbindung"], $_POST["password"]);
+        $username = mysqli_real_escape_string($_SESSION["verbindung"], $_POST["username"]);
+        $password = mysqli_real_escape_string($_SESSION["verbindung"], $_POST["password"]);
 
+        $allenutzer = "SELECT * FROM `user` WHERE `username` = '$username'";
 
-              $allenutzer = "SELECT * FROM `user` WHERE `username` = '$username'";
-
-              //Wenn Nutzername in Datenbank gefunden wurde
-              $result = mysqli_query($_SESSION["verbindung"], $allenutzer);
-              if ($result) {
-                  $user = mysqli_fetch_assoc($result);
-                  $hash = $user["password"];
-                  //Wenn Passwort übereinstimmt Weiterleitung auf Hauptseite und Name der Person als Session Array
-                  if (password_verify($password, $hash)) {
-                      $_SESSION["benutzer"] = htmlspecialchars($user["email"]);
-                      header("Location: welcome.php");
-                      die();
-                  }
-                  else {
-                      $warnung = "Failed to log in, please try again!";
-                      return $warnung;
-                  }
-              }
-              else {
-                  $warnung = "Failed to log in, Database Error";
-                  return $warnung;
-              }
-          }
-      }
-  ?>
+        //Wenn Nutzername in Datenbank gefunden wurde
+        $result = mysqli_query($_SESSION["verbindung"], $allenutzer);
+        if ($result) {
+            $user = mysqli_fetch_assoc($result);
+            $hash = $user["password"];
+            //Wenn Passwort übereinstimmt Weiterleitung auf Hauptseite und Name der Person als Session Array
+            if (password_verify($password, $hash)) {
+                $_SESSION["benutzer"] = htmlspecialchars($user["email"]);
+                header("Location: welcome.php");
+                die();
+            } else {
+                $warnung = "Failed to log in, please try again!";
+                return $warnung;
+            }
+        } else {
+            $warnung = "Failed to log in, Database Error";
+            return $warnung;
+        }
+    }
+}
+?>
