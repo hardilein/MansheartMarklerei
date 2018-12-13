@@ -27,7 +27,6 @@ $title = "Alle Immobilien";
                 </thead>
                 <tbody>
                 <?php
-include './app/Data/DataContext.php';
 $pdo = Database::connect();
 $sql = 'SELECT * FROM immobilien ORDER BY id DESC';
 foreach ($pdo->query($sql) as $row) {

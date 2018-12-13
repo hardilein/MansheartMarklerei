@@ -1,104 +1,87 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vitalij
- * Date: 2018-12-09
- * Time: 22:23
- */
-
-require_once 'database.php';
-
-if (!empty($_POST)) {
-    // keep track validation errors
-    $nameError   = null;
-    $emailError  = null;
-    $mobileError = null;
-
-    // keep track post values
-    $name   = $_POST['name'];
-    $email  = $_POST['email'];
-    $mobile = $_POST['mobile'];
-
-    // validate input
-    $valid = true;
-    if (empty($name)) {
-        $nameError = 'Please enter Name';
-        $valid     = false;
-    }
-
-    if (empty($email)) {
-        $emailError = 'Please enter Email Address';
-        $valid      = false;
-    }
-    else {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailError = 'Please enter a valid Email Address';
-            $valid      = false;
-        }
-    }
-
-    if (empty($mobile)) {
-        $mobileError = 'Please enter Mobile Number';
-        $valid       = false;
-    }
-
-    // insert data
-    if ($valid) {
-        $pdo = Database::connect();
-
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $sql = "INSERT INTO customers (name,email,mobile) values(?, ?, ?)";
-        $q   = $pdo->prepare($sql);
-        $q->execute(array($name, $email, $mobile));
-        Database::disconnect();
-        header("Location: index.php");
-    }
-}
+require_once "./app/Controllers/UserController.php"
 ?>
 
 <div class="container">
 
-    <div class="span10 offset1">
-        <div class="row">
-            <h3>Create a Customer</h3>
+    <h3>Registration</h3>
+
+
+    <form action="index.php?v=Registrieren"
+          method="post">
+        <div class="form-group <?php echo !empty($usernameError) ? 'error' : ''; ?>">
+            <label for="username">Username</label>
+
+            <input class="form-control"
+                   id="username"
+                   name="username"
+                   type="text"
+                   placeholder="Name"
+                   value="<?php echo !empty($username) ? $username : ''; ?>">
+            <?php if (!empty($usernameError)): ?>
+            <span class="note">
+                <?php echo $usernameError; ?></span>
+            <?php endif;?>
+
+        </div>
+        <div class="form-group <?php echo !empty($passwordError) ? 'error' : ''; ?>">
+            <label for="password">Password</label>
+
+            <input class="form-control"
+                   id="password"
+                   name="password"
+                   type="password"
+                   placeholder="Password"
+                   value="<?php echo !empty($password) ? $password : ''; ?>">
+            <?php if (!empty($passwordError)): ?>
+            <span class="note">
+                <?php echo $passwordError; ?></span>
+            <?php endif;?>
+
+        </div>
+        <div class="form-group <?php echo !empty($emailError) ? 'error' : ''; ?>">
+            <label for="email">Email</label>
+
+            <input class="form-control"
+                   id="email"
+                   name="email"
+                   type="text"
+                   placeholder="E-Mail"
+                   value="<?php echo !empty($email) ? $email : ''; ?>">
+            <?php if (!empty($emailError)): ?>
+            <span class="note">
+                <?php echo $emailError; ?></span>
+            <?php endif;?>
+
+        </div>
+        <div class="form-group <?php echo !empty($rollenIdError) ? 'error' : ''; ?>">
+            <label for="rollenId">Rolle</label>
+
+            <select id="rollenId"
+                    name="rollenId"
+                    type="text"
+                    placeholder="Rolle"
+                    value="<?php echo !empty($rollenId) ? $rollenId : ''; ?>">
+                <option value="" selected>Bitte wählen..</option>
+                <option value="1">Basis</option>
+                <option value="2">Makler</option>
+            </select>
+
+            <?php if (!empty($rollenIdError)): ?>
+            <span class="note">
+                <?php echo $rollenIdError; ?></span>
+            <?php endif;?>
+
         </div>
 
-        <form class="form-horizontal" action="create.php" method="post">
-            <div class="form-group <?php echo !empty($nameError) ? 'error' : ''; ?>">
-                <label for="name">Name</label>
 
-                <input class="form-control" id="name" name="name" type="text" placeholder="Name"
-                       value="<?php echo !empty($name) ? $name : ''; ?>">
-                <?php if (!empty($nameError)): ?>
-                    <span class="help-inline"><?php echo $nameError; ?></span>
-                <?php endif; ?>
 
-            </div>
-            <div class="form-group <?php echo !empty($emailError) ? 'error' : ''; ?>">
-                <label for="email">Email Address</label>
-
-                <input class="form-control" id="email" name="email" type="text" placeholder="Email Address"
-                       value="<?php echo !empty($email) ? $email : ''; ?>">
-                <?php if (!empty($emailError)): ?>
-                    <span class="help-inline"><?php echo $emailError; ?></span>
-                <?php endif; ?>
-
-            </div>
-            <div class="form-group <?php echo !empty($mobileError) ? 'error' : ''; ?>">
-                <label for="mobile">Mobile Number</label>
-
-                <input class="form-control" id="mobile" name="mobile" type="text" placeholder="Mobile Number"
-                       value="<?php echo !empty($mobile) ? $mobile : ''; ?>">
-                <?php if (!empty($mobileError)): ?>
-                    <span class="help-inline"><?php echo $mobileError; ?></span>
-                <?php endif; ?>
-
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-success">Create</button>
-                <a class="btn" href="index.php">Back</a>
-            </div>
-        </form>
-    </div>
-</div> 
+        <div class="form-actions">
+            <button type="submit"
+                    class="btn btn-success">Create</button>
+            <a class="btn"
+               href="index.php">Back</a>
+        </div>
+    </form>
+</div>
+</div>

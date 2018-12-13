@@ -1,6 +1,7 @@
 
 <?php
-define('AccessConstant', TRUE);
+define('AccessConstant', true);
+include './app/Data/DataContext.php';
 
 ?>
 <!DOCTYPE html>
@@ -33,8 +34,8 @@ switch ($view) {
     case 'Immobilien':
         require_once "./app/Views/Immobilien/Alle/immo-alle.php";
         break;
-    case 'cretae':
-        require_once "./Client/bla.php";
+    case 'Registrieren':
+        require_once "./app/Views/Account/Register/register.php";
         break;
     case 'cretae':
         require_once "./Client/bla.php";

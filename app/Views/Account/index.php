@@ -21,7 +21,7 @@
                   <div><a class="lg_btn"
                            href="./?v=login"> Login</a></div>
                   <div><a class="lg_btn"
-                           href="./?v=login"> Registrieren</a></div>
+                           href="./?v=Registrieren"> Registrieren</a></div>
                   <div><a class="lg_btn"
                            href="./index.php?v=Immobilien"> Als Gast fortfahren</a></div>
             </div>
