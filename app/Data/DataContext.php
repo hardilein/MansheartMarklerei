@@ -2,12 +2,12 @@
 
 class Database
 {
+    //TODO: webconfig
+    
     private static $db = 'mansheart' ;
     private static $host = 'localhost' ;
     private static $user = 'root';
-    private static $password = 'My102118910';
-
-    private static $dbFile = 'db/jurijphp.sqlite';
+    private static $password = 'Root123456';
 
     private static $cont = null;
 
