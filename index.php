@@ -37,8 +37,8 @@ switch ($view) {
     case 'Registrieren':
         require_once "./app/Views/Account/Register/register.php";
         break;
-    case 'cretae':
-        require_once "./Client/bla.php";
+    case 'Watch':
+        require_once "./app/Views/Watchlist/watch.php";
         break;
     case 'cretae':
         require_once "./Client/bla.php";
