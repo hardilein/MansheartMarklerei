@@ -52,12 +52,14 @@ foreach ($pdo->query($sql) as $row) {
     // <td><a class="btn" href="read.php?id=' . $row['id'] . '">Read</a></td>
     // </tr>';
 
-    echo '<td><img class="immo_img"src="./Uploads/' . $row['photo'] . '"></td>';
-    echo '<td>' . $row['name'] . '</td>';
-    echo '<td>' . $row['size'] . '</td>';
-    echo '<td>' . $row['nr_rooms'] . '</td>';
-    echo '<td>' . $row['nr_floors'] . '</td>';
-    echo '<td>' . $row['yearofconstruction'] . '</td>';
+    // echo '<td><img class="immo_img"src="./Uploads/' . $row['photo'] . '"></td>';
+    // echo '<td>' . $row['name'] . '</td>';
+    // echo '<td>' . $row['size'] . '</td>';
+    // echo '<td>' . $row['nr_rooms'] . '</td>';
+    // echo '<td>' . $row['nr_floors'] . '</td>';
+    // echo '<td>' . $row['yearofconstruction'] . '</td>';
+
+
  echo   '<div class="card">
     	        <div id="card-left">
         	        <img class="immo_img"src="./Uploads' . $row['photo'] . '"/>
@@ -72,8 +74,8 @@ foreach ($pdo->query($sql) as $row) {
                     </div>
                 </div>
                 <div id="card-right-middle">
-                ' . $row['qm'] . ' m&sup2, ' . $row['rooms'] . ' Räume,' . $row['floors'] . ' Stockwerke
-                    <div class="card-right-middle-description">' . $row['descr'] . '</div>
+                ' . $row['qm'] . ' m&sup2, ' . $row['nr_rooms'] . ' Räume,' . $row['nr_floors'] . ' Stockwerke
+                    <div class="card-right-middle-description">' . $row['description'] . '</div>
                     <span>Read more....</span>
                 </div>
                 <div id="card-right-bottom">
