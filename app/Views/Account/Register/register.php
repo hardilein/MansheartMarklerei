@@ -1,5 +1,8 @@
 <?php
-require_once "./app/Controllers/UserController.php"
+require_once "./app/Controllers/UserController.php";
+//Da UserController.php sich nicht nur um die Registrierung kümmert übergeben wir noch eine Methode
+$_POST["method"]="register";
+
 ?>
 
 <div class="container">
@@ -49,7 +52,7 @@ require_once "./app/Controllers/UserController.php"
             <input class="form-control"
                    id="email"
                    name="email"
-                   type="text"
+                   type="email"
                    placeholder="E-Mail"
                    value="<?php echo !empty($email) ? $email : ''; ?>">
             <?php if (!empty($emailError)): ?>
