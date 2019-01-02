@@ -3,6 +3,7 @@
 if (!empty($_POST)) {
     // keep track validation errors
     $usernameError = null;
+    $usernameDuplicateError = null;
     $emailError = null;
     $passwordError = null;
     $rollenIdError = null;
@@ -11,7 +12,6 @@ if (!empty($_POST)) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $rollenId = $_POST['rollenId'];
 
     // validate input
     $valid = true;
@@ -34,19 +34,25 @@ if (!empty($_POST)) {
         $passwordError = 'Bitte Passwort eingeben';
         $valid = false;
     }
-    if (empty($rollenId)) {
-        $rollenId = 'Bitte Nutzerrolle wählen';
+
+    $pdo = Database::connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $result = $q->execute(array('username' => $username));
+    $user = $q->fetch();
+
+    if ($user) {
+        $usernameDuplicateError = 'Dieser Nutzername wird bereits verwendet';
         $valid = false;
     }
 
     if ($valid) {
-        $pdo = Database::connect();
 
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO users (username,email,password,rollenId) values(?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username,email,password) values(?, ?, ?)";
         $q = $pdo->prepare($sql);
-        $q->execute(array($username, $email, $password, $rollenId));
+        $q->execute(array($username, $email, $password));
         Database::disconnect();
+
         header("Location: index.php");
     }
 }

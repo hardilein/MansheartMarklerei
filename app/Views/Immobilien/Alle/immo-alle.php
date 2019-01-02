@@ -32,11 +32,11 @@ $sql = 'SELECT * FROM immobilien ORDER BY id DESC';
 foreach ($pdo->query($sql) as $row) {
     echo '<tr>';
 
-    echo '<td><img class="immo_img"src="./Uploads/Pictures' . $row['photo'] . '"></td>';
+    echo '<td><img class="immo_img"src="./Uploads/' . $row['photo'] . '"></td>';
     echo '<td>' . $row['name'] . '</td>';
-    echo '<td>' . $row['qm'] . '</td>';
-    echo '<td>' . $row['rooms'] . '</td>';
-    echo '<td>' . $row['floors'] . '</td>';
+    echo '<td>' . $row['size'] . '</td>';
+    echo '<td>' . $row['nr_rooms'] . '</td>';
+    echo '<td>' . $row['nr_floors'] . '</td>';
     echo '<td>' . $row['yearofconstruction'] . '</td>';
 
     echo '<td><a class="btn" href="read.php?id=' . $row['id'] . '">Read</a></td>';

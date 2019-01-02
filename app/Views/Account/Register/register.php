@@ -22,6 +22,10 @@ require_once "./app/Controllers/UserController.php"
             <span class="note">
                 <?php echo $usernameError; ?></span>
             <?php endif;?>
+            <?php if (!empty($usernameDuplicateError)): ?>
+            <span class="note">
+                <?php echo $usernameDuplicateError; ?></span>
+            <?php endif;?>
 
         </div>
         <div class="form-group <?php echo !empty($passwordError) ? 'error' : ''; ?>">
@@ -54,27 +58,8 @@ require_once "./app/Controllers/UserController.php"
             <?php endif;?>
 
         </div>
-        <div class="form-group <?php echo !empty($rollenIdError) ? 'error' : ''; ?>">
-            <label for="rollenId">Rolle</label>
-
-            <select id="rollenId"
-                    name="rollenId"
-                    type="text"
-                    placeholder="Rolle"
-                    value="<?php echo !empty($rollenId) ? $rollenId : ''; ?>">
-                <option value="" selected>Bitte wählen..</option>
-                <option value="1">Basis</option>
-                <option value="2">Makler</option>
-            </select>
-
-            <?php if (!empty($rollenIdError)): ?>
-            <span class="note">
-                <?php echo $rollenIdError; ?></span>
-            <?php endif;?>
 
         </div>
-
-
 
         <div class="form-actions">
             <button type="submit"

@@ -7,7 +7,7 @@ class Database
     private static $db = 'mansheart' ;
     private static $host = 'localhost' ;
     private static $user = 'root';
-    private static $password = 'Root123456';
+    private static $password = '';
 
     private static $cont = null;
 
