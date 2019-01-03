@@ -22,7 +22,7 @@ class Database
         if (null == self::$cont) {
             try
             {
-                self::$cont = new PDO("mysql:host=" . self::$host . ";" . "dbname=" . self::$db, self::$user, self::$password);
+                self::$cont = new PDO("mysql:host=" . self::$host . ";" . "dbname=" . self::$db. ";charset=utf8", self::$user, self::$password );
             } catch (PDOException $e) {
                 die($e->getMessage());
             }
