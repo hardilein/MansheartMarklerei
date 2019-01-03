@@ -23,7 +23,7 @@ $title = "Alle Immobilien";
 
             //
 
-
+<!-- 
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -36,7 +36,7 @@ $title = "Alle Immobilien";
                         <th>Optionen</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> -->
                     <?php
 $pdo = Database::connect();
 $sql = 'SELECT * FROM immobilien ORDER BY id DESC';
@@ -86,8 +86,8 @@ foreach ($pdo->query($sql) as $row) {
 }
 Database::disconnect();
 ?>
-                </tbody>
-            </table>
+                <!-- </tbody>
+            </table> -->
         </div>
     </div> <!-- /container -->
 </body>

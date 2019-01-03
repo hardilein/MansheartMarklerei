@@ -4,10 +4,10 @@ class Database
 {
     //TODO: webconfig
     
-    private static $db = 'mansheart' ;
+    private static $db = 'mansheart2' ;
     private static $host = 'localhost' ;
     private static $user = 'root';
-    private static $password = '';
+    private static $password = 'Root123456';
 
     private static $cont = null;
 
