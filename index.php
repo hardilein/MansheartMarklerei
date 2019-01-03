@@ -43,7 +43,7 @@ switch ($view) {
     case 'Watch':
         require_once "./app/Views/Watchlist/watch.php";
         break;
-    case 'login':
+    case 'Login':
         require_once "./app/Views/Account/Login/login.php";
         break;
     case 'cretae':

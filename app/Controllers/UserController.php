@@ -1,18 +1,16 @@
 <?php
-$pdo = Database::connect();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if (!empty($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//DEBUG:
-    print_r($_POST);
-
-    switch ($_POST["method"]) {
-        case 'register':
+    switch ($_GET["v"]) {
+        case 'Registrieren':
             register();
             break;
-        case 'login':
+        case 'Login':
             login();
+            break;
+        case 'Logout':
+            logout();
             break;
     }
 
@@ -20,39 +18,45 @@ if (!empty($_POST)) {
 
 function login()
 {
-    if (isset($_GET['login'])) {
-        $email = $_POST['email'];
-        $passwort = $_POST['passwort'];
+    //DEBUG
+    echo ("Login Called");
 
-        $q = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $result = $q->execute(array('email' => $email));
-        $user = $q->fetch();
+    session_start();
 
-        //Überprüfung des Passworts
-        if ($user !== false && password_verify($passwort, $user['passwort'])) {
-            $_SESSION['userid'] = $user['id'];
-            die('Login erfolgreich. Weiter zu <a href="geheim.php">internen Bereich</a>');
-        } else {
-            $errorMessage = "E-Mail oder Passwort war ungültig<br>";
-        }
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $pdo = Database::connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $result = $q->execute(array('username' => $username));
+    $user = $q->fetch();
+    print_r($user);
+    //Überprüfung des Passworts
+    if ($user !== false && password_verify($password, $user['password'])) {
+        $_SESSION['userid'] = $user['id'];
+        die('Login erfolgreich. Weiter zu <a href="index.php">internen Bereich</a>');
+    } else {
+        $errorMessage = "Nutzername oder Passwort war ungültig<br>";
     }
+
 }
 
 function register()
 {
-    // keep track validation errors
+    //Validierungfehler tracken
     $usernameError = null;
     $usernameDuplicateError = null;
     $emailError = null;
     $passwordError = null;
     $rollenIdError = null;
 
-    // keep track post values
+    // übergebene Werte
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // validate input
+    // Eingabe Validierung
     $valid = true;
     if (empty($username)) {
         $usernameError = 'Bitte Namen eingeben';
@@ -73,7 +77,10 @@ function register()
         $passwordError = 'Bitte Passwort eingeben';
         $valid = false;
     }
+    // auf bereits vorhandenen Nutzernamen prüfen
 
+    $pdo = Database::connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $result = $q->execute(array('username' => $username));
     $user = $q->fetch();
@@ -83,6 +90,7 @@ function register()
         $valid = false;
     }
 
+    // validierte Eingaben persistieren
     if ($valid) {
         $passwort_hash = password_hash($passwort, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (username,email,password) values(?, ?, ?)";
@@ -92,4 +100,14 @@ function register()
 
         header("Location: index.php");
     }
+}
+
+function logout()
+{
+
+    session_start();
+    session_destroy();
+
+    echo "Logout erfolgreich";
+
 }

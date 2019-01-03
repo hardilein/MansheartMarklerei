@@ -1,7 +1,6 @@
 <?php
 require_once "./app/Controllers/UserController.php";
 //Da UserController.php sich nicht nur um die Registrierung kümmert übergeben wir noch eine Methode
-$_POST["method"]="register";
 
 ?>
 
@@ -66,9 +65,9 @@ $_POST["method"]="register";
 
         <div class="form-actions">
             <button type="submit"
-                    class="btn btn-success">Create</button>
-            <a class="btn"
-               href="index.php">Back</a>
+                    class="lg_btn">Registrieren</button>
+            <a class="lg_btn"
+               href="index.php">Zurück</a>
         </div>
     </form>
 </div>
