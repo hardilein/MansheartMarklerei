@@ -15,6 +15,12 @@ $sql = 'SELECT * FROM immobilien ORDER BY id DESC';
 $i=0;
 foreach ($pdo->query($sql) as $row) {
 $oddclass = (++$i % 2)?"":"alt";
+
+// Einer der vielen möglichen Lösungen (die einfachste)
+$description = explode('.', $row['description']);
+$shortDescription = array_shift($description) . ". ". array_shift($description); // 2 Sätze als Short Description anzeigen
+$longDescription = implode(". ", $description); //Der Rest
+
 ?>
 
 <div class="immo-card <?php echo $oddclass;?>">
@@ -42,14 +48,14 @@ $oddclass = (++$i % 2)?"":"alt";
   <div>
     <input type="checkbox" class="read-more-state" id="immo-<?php echo $row['id'];?>" />
     <div class="read-more-wrap">
-      <p><?php echo $row['description'];?>
-        <span class="read-more-target">Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</span>
+      <p><?php echo $shortDescription ;?>
+        <span class="read-more-target"><?php echo $longDescription ;?></span>
       </p>
     </div>
     <div class="price">
       <span>€<?php echo number_format($row['price'],0,',','.').",-";?></span>
     </div>
-    <label for="post-1" class="read-more-trigger"></label>
+    <label for="immo-<?php echo $row['id'];?>" class="read-more-trigger"></label>
   </div>
 </div>
 </div>
