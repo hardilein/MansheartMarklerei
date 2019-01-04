@@ -24,6 +24,7 @@
 
         <nav class="site-navigation">
             <ul>
+                <li><?php echo (!isLoggedIn()?'':'Hallo ' . $_SESSION['username'] . '!');?> </li>
                 <li>
                     <?php if(!isLoggedIn()):?>
                         <a href="#open-modal-login">Login</a></li>

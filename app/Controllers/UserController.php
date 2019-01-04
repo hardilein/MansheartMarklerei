@@ -33,6 +33,7 @@ function login()
 
     if ($user !== false && password_verify($password, $user['password'])) {
         $_SESSION['userid'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
         //die('Login erfolgreich. Weiter zu <a href="index.php">internen Bereich</a>');
         header("Location: index.php?loginsuccsess=1#open-modal-login");
         exit();
