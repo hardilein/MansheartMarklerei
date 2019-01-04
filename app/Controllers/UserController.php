@@ -24,7 +24,6 @@ function login()
     $password = $_POST['password'];
 
     global $pdo;
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $result = $q->execute(array('username' => $username));
     $user = $q->fetch();
@@ -92,7 +91,7 @@ function register()
     // auf bereits vorhandenen Nutzernamen prüfen
 
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $result = $q->execute(array('username' => $username));
     $user = $q->fetch();
