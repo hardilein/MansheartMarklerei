@@ -8,7 +8,7 @@
                title="Close"
                class="modal-close">Schliessen</a>
             <h1>Erfolgreich eingeloggt</h1>
-            <p class="message"><a href="#">Weiter zur Seite</a></p>
+            <p class="message">Weiter <a href="#">zur Seite</a></p>
         </div>
     </div>
 

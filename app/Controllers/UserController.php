@@ -109,7 +109,7 @@ function register()
         $q->execute(array($username, $email, $password_hash));
         Database::disconnect();
         
-        header("Location: index.php?message=". $message ."#open-modal-register");
+        header("Location: index.php?registersuccess=1&message=". $message ."#open-modal-register");
         unset($_SESSION['fields']);
         exit();
     } else {
