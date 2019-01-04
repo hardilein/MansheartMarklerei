@@ -40,7 +40,8 @@ function deleteFromWatchList($id) {
     global $watchlist;
     $watchlist = array_diff($watchlist, array($id));
     setcookie("hab_watchlist", implode(",",$watchlist));
-    header('Location: index.php#immo-card-'.$id);
+    // header('Location: index.php#immo-card-'.$id);
+    header('Location: index.php');
 }
 
 function isInWatchList($id) {
