@@ -18,8 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function login()
 {
-    //DEBUG
-    echo ("Login Called");
     session_destroy();
     session_start();
 
@@ -62,7 +60,7 @@ function register()
     $_SESSION["fields"]["username"] = $username;
     $_SESSION["fields"]["email"] = $email;
 
-    $errorfileds = ""; 
+    $errorfields = "";
 
     // Eingabe Validierung
     $valid = true;
@@ -113,9 +111,8 @@ function register()
         Database::disconnect();
         
         header("Location: index.php?message=". $message ."#open-modal-register");
-    
+        unset($_SESSION['fields']);
         exit();
-
     } else {
         $errormessage = "Bitte überprüfen Sie die Felder:<br />" . $errorfields;
         header("Location: index.php?errormessage=". $errormessage ."#open-modal-register");

@@ -1,7 +1,13 @@
 <?php
-session_start();
+
 define('AccessConstant', true);
+
+session_start();
+
+
 require_once './app/Data/DataContext.php';
+require_once "./app/Controllers/UserController.php";
+require_once "./app/Controllers/WatchController.php";
 
 //TODO: überall title einfügen
 ?>
@@ -35,7 +41,7 @@ require_once './app/Data/DataContext.php';
           <li><a href="#open-modal-register">Registrieren</a></li>
           <li><a href="#">
               <div class="dropdown">
-                <span>Watchlist</span>
+                <span>Watchlist (<?=getWatchlistCount()?>)</span>
                 <div class="dropdown-content">
                   <p>Hello World!</p>
                   <p>Hello World!</p>
@@ -85,7 +91,7 @@ require_once './app/Data/DataContext.php';
           <?php #
 if (isset($_GET["message"])) {
     echo $_GET["message"];
-} #endregion
+}
 if (isset($_GET["errormessage"])) {
     echo $_GET["errormessage"];
 }
@@ -142,21 +148,12 @@ if (!isset($_GET['id'])) {
     $unitId = $_GET['id'];
 }
 
-include "./app/shared/header.php";
+// include "./app/shared/header.php";
 
 // routing anhand übergebener Werte
 switch ($view) {
     case 'Immobilien':
         require_once "./app/Views/Immobilien/Alle/immo-alle.php";
-        break;
-    case 'Registrieren':
-        require_once "./app/Views/Account/Register/register.php";
-        break;
-    case 'Watch':
-        require_once "./app/Views/Watchlist/watch.php";
-        break;
-    case 'Login':
-        require_once "./app/Views/Account/Login/login.php";
         break;
     case 'Create':
         require_once "./app/Views/Immobilien/Edit/immo-edit.php";

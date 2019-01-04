@@ -5,7 +5,10 @@ class Database
     //TODO: webconfig
 
     private static $db = 'mansheart';
-    private static $host = 'localhost';
+    // private static $host = 'localhost';
+    private static $host = '127.0.0.1';
+    // private static $port = 3306; // Default
+    private static $port = 32780; // Vitalij Docker
     private static $user = 'root';
     private static $password = '';
 
@@ -22,7 +25,7 @@ class Database
         if (null == self::$cont) {
             try
             {
-                self::$cont = new PDO("mysql:host=" . self::$host . ";" . "dbname=" . self::$db. ";charset=utf8", self::$user, self::$password );
+                self::$cont = new PDO("mysql:host=" . self::$host . ";" . "dbname=" . self::$db. ";port=" . self::$port . ";charset=utf8", self::$user, self::$password );
             } catch (PDOException $e) {
                 die($e->getMessage());
             }

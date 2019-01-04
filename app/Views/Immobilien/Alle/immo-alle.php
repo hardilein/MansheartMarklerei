@@ -36,11 +36,11 @@ $oddclass = (++$i % 2)?"":"alt";
 <div class="description">
   <div class="header">
     <h1><?php echo $row['name'];?></h1>
-    <div class="watch-icon"><a href="#"></a></div>
+    <div class="watch-icon<?php echo isInWatchList($row['id'])?'-active':'';?>"><a href="?v=Watch&a=<?php echo isInWatchList($row['id'])?'delete':'add';?>&id=<?php echo $row['id'];?>"></a></div>
   </div>
   <h2>Bj. <?php echo $row['yearofconstruction'];?> - <?php echo $row['size'];?>m² - Lvl. <?php echo $row['nr_floors'];?>- <?php echo $row['nr_rooms'];?> Zi.</h2>
   <div>
-    <input type="checkbox" class="read-more-state" id="post-1" />
+    <input type="checkbox" class="read-more-state" id="immo-<?php echo $row['id'];?>" />
     <div class="read-more-wrap">
       <p><?php echo $row['description'];?>
         <span class="read-more-target">Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</span>
