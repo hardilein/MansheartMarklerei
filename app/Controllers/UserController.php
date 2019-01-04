@@ -1,5 +1,7 @@
 <?php
 
+if(isset($_GET["v"]) && $_GET["v"] == "Logout") logout();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($_GET["v"]) {
@@ -8,9 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'Login':
             login();
-            break;
-        case 'Logout':
-            logout();
             break;
     }
 
@@ -35,7 +34,7 @@ function login()
     if ($user !== false && password_verify($password, $user['password'])) {
         $_SESSION['userid'] = $user['id'];
         //die('Login erfolgreich. Weiter zu <a href="index.php">internen Bereich</a>');
-        header("Location: index.php");
+        header("Location: index.php?loginsuccsess=1#open-modal-login");
         exit();
     } else {
         $errorMessage = "Nutzername oder password war ungültig<br>";
@@ -120,12 +119,14 @@ function register()
     }
 }
 
-function logout()
-{
-
-    session_start();
+function logout() {
+    unset($_SESSION['userid']);
     session_destroy();
+}
 
-    echo "Logout erfolgreich";
-
+function isLoggedIn() {
+    return
+        isset($_SESSION['userid']) &&
+        !empty($_SESSION['userid']) &&
+        is_numeric($_SESSION['userid']);
 }

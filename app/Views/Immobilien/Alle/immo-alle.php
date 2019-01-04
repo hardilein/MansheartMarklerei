@@ -4,7 +4,7 @@ if (!defined('AccessConstant')) {
 }
 $title = "Alle Immobilien";
 
-session_start();
+// session_start();
 print_r ($_SESSION);
 
 ?>
