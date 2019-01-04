@@ -32,7 +32,8 @@ function addToWatchList($id) {
     if(!isInWatchList($id)) {
         array_push($watchlist, $id);
         setcookie("hab_watchlist", implode(",", $watchlist));
-        header('Location: index.php#immo-card-'.$id);
+        // header('Location: index.php#immo-card-'.$id);
+        header('Location: index.php');
     }
 }
 
