@@ -32,6 +32,7 @@ function addToWatchList($id) {
     if(!isInWatchList($id)) {
         array_push($watchlist, $id);
         setcookie("hab_watchlist", implode(",", $watchlist));
+        header('Location: index.php#immo-card-'.$id);
     }
 }
 
@@ -39,6 +40,7 @@ function deleteFromWatchList($id) {
     global $watchlist;
     $watchlist = array_diff($watchlist, array($id));
     setcookie("hab_watchlist", implode(",",$watchlist));
+    header('Location: index.php#immo-card-'.$id);
 }
 
 function isInWatchList($id) {

@@ -23,7 +23,7 @@ $longDescription = implode(". ", $description); //Der Rest
 
 ?>
 
-<div class="immo-card <?php echo $oddclass;?>">
+<div id="immo-card-<?php echo $row['id'];?>" class="immo-card <?php echo $oddclass;?>">
 <div class="meta">
   <div class="photo" style="background-image: url(./Uploads/<?php echo $row["photo"];?>)"></div>
   <ul class="details">
