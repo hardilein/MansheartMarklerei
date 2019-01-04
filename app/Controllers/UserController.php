@@ -23,7 +23,7 @@ function login()
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $pdo = Database::connect();
+    global $pdo;
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $result = $q->execute(array('username' => $username));
@@ -45,6 +45,8 @@ function login()
 
 function register()
 {
+    global $pdo;
+
     //Validierungfehler tracken
     $usernameError = null;
     $usernameDuplicateError = null;
@@ -89,7 +91,7 @@ function register()
     }
     // auf bereits vorhandenen Nutzernamen prüfen
 
-    $pdo = Database::connect();
+
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $q = $pdo->prepare("SELECT * FROM users WHERE username = :username");
     $result = $q->execute(array('username' => $username));

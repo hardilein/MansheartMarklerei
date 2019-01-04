@@ -18,7 +18,7 @@
 <body>
 <div class="site">
     <header class="site-header">
-        <h1 class="site-title">Mansheart Marklerei</h1>
+        <h1 class="site-title">Mansheart Maklerei</h1>
 
         <nav class="site-navigation">
             <ul>

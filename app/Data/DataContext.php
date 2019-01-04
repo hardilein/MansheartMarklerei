@@ -43,3 +43,5 @@ class Database
         self::$cont = null;
     }
 }
+
+$pdo = Database::connect();
