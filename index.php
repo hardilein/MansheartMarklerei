@@ -35,7 +35,7 @@ require_once "./app/Controllers/WatchController.php";
 
 require_once "./app/Views/Layout/header.php";
 
-require_once $content;
+if(isset($content) && !empty($content)) require_once $content;
 
 require_once "./app/Views/Layout/footer.php";
 

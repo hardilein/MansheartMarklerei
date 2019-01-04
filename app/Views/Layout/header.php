@@ -17,8 +17,6 @@
 
 <body>
 <div class="site">
-
-
     <header class="site-header">
         <h1 class="site-title">Mansheart Marklerei</h1>
 
