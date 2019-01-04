@@ -608,3 +608,9 @@ p:last-child {
     color: #4CAF50;
     text-decoration: none;
 }
+
+/* other styles */
+
+#sub-nav {
+    text-align: right;
+}

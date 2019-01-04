@@ -29,18 +29,9 @@
                     <?php else:?>
                         <a href="?v=Logout">Logout</a></li>
                     <?php endif;?>
-                <li><a href="#open-modal-register">Registrieren</a></li>
-                <li><a href="#">
-                        <div class="dropdown">
-                            <span>Watchlist (<?= getWatchlistCount() ?>)</span>
-                            <div class="dropdown-content">
-                                <p>Hello World!</p>
-                                <p>Hello World!</p>
-                                <p>Hello World!</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                <?php if(!isLoggedIn()):?>
+                    <li><a href="#open-modal-register">Registrieren</a></li>
+                <?php endif;?>
             </ul>
         </nav><!-- .site-navigation -->
     </header><!-- .site-header -->
