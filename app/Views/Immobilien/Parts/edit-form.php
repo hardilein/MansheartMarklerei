@@ -4,7 +4,7 @@ if (!defined('AccessConstant')) {
 }
 ?>
 
-<div class="form">
+<div class="form edit-form">
     <form class="immobilie-create-form"
           enctype="multipart/form-data"
           action="?v=Registrieren"
@@ -36,9 +36,7 @@ if (!defined('AccessConstant')) {
         />
         <textarea
             name="description"
-            placeholder="Beschreibung ...">
-            <?php echo !empty($_SESSION["fields"]["username"]) ? $_SESSION["fields"]["username"] : ''; ?>
-        </textarea>
+            placeholder="Beschreibung ..."></textarea>
         <input name="photo"
                type="hidden"
                placeholder="Bitte Foto Auswählen"
