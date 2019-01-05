@@ -38,6 +38,8 @@ COLLATE 'utf8_bin' NOT NULL,
   `nr_floors` INT
 (11) NOT NULL,
   `yearofconstruction` INT
+  (11) NOT NULL,
+  `price` INT
 (11) NOT NULL,
   `date_posted` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `description` TEXT CHARACTER

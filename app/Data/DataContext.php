@@ -26,7 +26,7 @@ class Database
             self::$port = 32780;
         }
 
-        // Verhindern das ein Client mehrere Verbindungen aufbaut
+        // Verhindern, dass ein Client mehrere Verbindungen aufbaut
         if (null == self::$cont) {
             try
             {
