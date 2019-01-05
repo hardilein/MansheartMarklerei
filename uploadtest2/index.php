@@ -70,21 +70,7 @@
         return $ret;
     }
 
-    $send = (isset($_POST['send']) && !empty($_POST['send'])) ? $_POST['send'] : NULL;
-    if ($send) {
-        if (count($_FILES) > 0) {
-            $fies = rearrangeFilesArray($_FILES['myfile']);
-            $uplstatus = createDir(__DIR__, 'uploads');
-            if ($uplstatus) {
-                $docstat  = createDir(__DIR__, 'uploads/docs/');
-                if ($docstat) {
-                    foreach($fies as $file) {
-                        move_uploaded_file($file['tmp_name'],__DIR__.'/uploads/docs'.'/'.$file['name']);
-                    }
-                }
-            }
-        }
-    }
+
 ?>
 <!DOCTYPE html>
 <html lang="de">

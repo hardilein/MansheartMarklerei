@@ -3,7 +3,7 @@ session_start();
 
 $sitetitle = "";
 $content = "";
-
+require_once './app/Config/config.php';
 require_once './app/Data/DataContext.php';
 require_once "./app/Controllers/UserController.php";
 require_once "./app/Controllers/WatchController.php";

@@ -4,11 +4,7 @@ if (!defined('AccessConstant')) {
     die('Direct access not permitted');
 }
 
-
-
-
-
-if(!empty($_POST) && isset($_POST['create'])) {
+if(!empty($_POST) && isset($_POST['create']) && isLoggedIn()) {
     saveImmobilie();
 }
 
@@ -43,9 +39,10 @@ function getImmobilieById($id) {
 
 
 function saveImmobilie() {
+    global $pdo;
+    global $config;
 
     try {
-        global $pdo;
         $q = $pdo->prepare("INSERT INTO immobilien(userid, name, size, nr_rooms, nr_floors, yearofconstruction, description) VALUES(?,?,?,?,?,?,?)");
         try {
             $q->execute(
@@ -66,6 +63,36 @@ function saveImmobilie() {
     } catch( PDOExecption $e ) {
         print "Error!: " . $e->getMessage() . "</br>";
     }
+
+    if (count($_FILES) > 0) {
+
+        // print_r($_FILES);
+        // exit;
+
+        $file = $_FILES['photo'];
+        $uplstatus = createDir($config['upload_dir']);
+        if ($uplstatus) {
+            $uniqFileName = uniqid() . "_" . $file['name'];
+            move_uploaded_file($file['tmp_name'],$config['upload_dir'].'/'.$uniqFileName);
+        }
+
+        try {
+            global $pdo;
+            $q = $pdo->prepare("UPDATE immobilien SET photo = ? WHERE id = ?");
+            try {
+                $q->execute(array($uniqFileName, $lastInsertId));
+
+            } catch(PDOExecption $e) {
+                print "Error!: " . $e->getMessage() . "</br>";
+            }
+        } catch( PDOExecption $e ) {
+            print "Error!: " . $e->getMessage() . "</br>";
+        }
+
+    }
+
+
+
 
 
 
