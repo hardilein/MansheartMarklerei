@@ -46,3 +46,13 @@
             <?php require_once "./app/Views/Account/Parts/register-form.php"; ?>
 
             <h1><?=$sitetitle?></h1>
+
+            <div id="sub-nav">
+                <nav>
+                    <?php if(isLoggedIn()):?>
+                        <a href="#">Alle Immobilien</a>
+                        <a href="?v=Create">Immobilie anlegen</a>
+                    <?php endif;?>
+                    <a href="#">Watchlist (<?= getWatchlistCount() ?>)</a>
+                </nav>
+            </div>

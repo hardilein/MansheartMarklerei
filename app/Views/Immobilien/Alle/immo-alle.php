@@ -12,23 +12,11 @@ if(!isLoggedIn()) {
     $immobilien = getAllImmobilienByUserId($_SESSION['userid']);
 }
 
-
-?>
-    <div id="sub-nav">
-        <nav>
-            <?php if(isLoggedIn()):?>
-            <a href="/html/">Alle Immobilien</a>
-            <?php endif;?>
-            <a href="#">Watchlist (<?= getWatchlistCount() ?>)</a>
-        </nav>
-    </div>
-<?php
-
 $i=0;
-foreach ($immobilien as $immo) {
+foreach ($immobilien as $immo) :
     $oddclass = (++$i % 2)?"":"alt";
 
-    // Einer der vielen möglichen Lösungen
+    // Description in short und long (der Rest) aufteilen. Eine der vielen möglichen Lösungen
     $description = explode('.', $immo['description']);
     $shortDescription = array_shift($description) . ". ". array_shift($description); // 2 Sätze als Short Description anzeigen
     $longDescription = implode(". ", $description); //Der Rest
@@ -69,18 +57,8 @@ foreach ($immobilien as $immo) {
     </div>
     </div>
 
+<?php endforeach;?>
 
-
-
-
-
-
-
-
-
-
-
-<?php }?>
 <div class="center">
     <div class="pagination">
         <a href="#">&laquo;</a>

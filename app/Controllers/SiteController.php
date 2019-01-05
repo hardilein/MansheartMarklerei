@@ -18,7 +18,7 @@ switch ($view) {
         $sitetitle = !isLoggedIn() ? "Alle Immobilien" : "Meine Immobilien";
         $content = "./app/Views/Immobilien/Alle/immo-alle.php";
         break;
-    case 'Create':
+    case 'Create' OR 'Edit':
         $sitetitle = "Immobilien hinzufügen";
         $content = "./app/Views/Immobilien/Edit/immo-edit.php";
         break;

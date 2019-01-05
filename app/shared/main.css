@@ -613,4 +613,5 @@ p:last-child {
 
 #sub-nav {
     text-align: right;
+    margin: -20px 0 20px;
 }
