@@ -2,7 +2,7 @@
 
 if(isset($_GET["v"]) && $_GET["v"] == "Logout") logout();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET["v"] == 'Registrieren' || $_GET["v"] == 'Login')) {
 
     switch ($_GET["v"]) {
         case 'Registrieren':

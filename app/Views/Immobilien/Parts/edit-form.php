@@ -7,7 +7,7 @@ if (!defined('AccessConstant')) {
 <div class="form edit-form">
     <form class="immobilie-create-form"
           enctype="multipart/form-data"
-          action="?v=Registrieren"
+          action="?v=Create"
           method="POST">
         <input name="name"
                type="text"
@@ -38,12 +38,11 @@ if (!defined('AccessConstant')) {
             name="description"
             placeholder="Beschreibung ..."></textarea>
         <input name="photo"
-               type="hidden"
+               type="file"
                placeholder="Bitte Foto Auswählen"
                value="<?php echo !empty($_SESSION["fields"]["username"]) ? $_SESSION["fields"]["username"] : ''; ?>"
         />
-
-        <button type="submit">create</button>
+        <button type="submit" name="create">create</button>
 
     </form>
 
